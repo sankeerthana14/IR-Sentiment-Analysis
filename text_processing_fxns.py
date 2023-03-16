@@ -2,6 +2,7 @@
 
 #Imports
 from nltk.corpus import stopwords
+from cleantext import clean
 import string
 import re
 
@@ -9,6 +10,9 @@ import re
 def processing(data):
     #remove new line characters
     data = re.sub('\s+', ' ', data)
+
+    #remove emojis
+    data = clean(data, no_emoji=True, no_punct=True, no_currency_symbols=True)
 
     #remove distracting single quotes
     data = str(re.sub("\'", "", data))
@@ -39,4 +43,6 @@ def remove_stopwords(data):
             filtered_words.append(word)
 
     return filtered_words
+
+
 
